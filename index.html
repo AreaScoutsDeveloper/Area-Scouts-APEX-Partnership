@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AREA SCOUTS | APEX - Athlete Performance Evaluation Index</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --orange: #ed7023;
+            --navy: #16345f;
+            --gray: #c0bdbc;
+            --green: #37c938;
+            --yellow: #ffde59;
+            --dark-bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 50%, var(--dark-bg) 100%);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { padding: 20px 0; border-bottom: 1px solid var(--border); }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .logo-image {
+            height: 90px;
+            width: auto;
+            border-radius: 8px;
+            background: white;
+            padding: 8px;
+        }
+        
+        .header-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            max-width: 380px;
+            line-height: 1.3;
+        }
+        
+        .header-title span { color: var(--orange); }
+        
+        .admin-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .admin-btn:hover { background: rgba(255,255,255,0.05); }
+        
+        /* CTA Section */
+        .cta-section { 
+            padding: 50px 0 40px 0; 
+            text-align: center; 
+        }
+        
+        .cta-row {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 280px;
+        }
+        
+        .btn-primary {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(55, 201, 56, 0.3); }
+        
+        .btn-secondary {
+            background: var(--orange);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+    <!-- HEADER - EXACT MATCH TO DESIGN -->
+    <header style="padding: 30px 0; background: #ffffff;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <!-- Top Row: Logo + Title -->
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF0WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNy4xLWMwMDAgNzkuZWRhMmIzZmFjLCAyMDIxLzExLzE3LTE3OjIzOjE5ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjMuMSAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDI0LTAxLTE1VDEwOjAwOjAwLTA1OjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyNC0wMS0xNVQxMDowMDowMC0wNTowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyNC0wMS0xNVQxMDowMDowMC0wNTowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCI+PC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7MJJfIAAAGaklEQVR4nO2dW3LbOBBFT5dT2f8yspJkJclKMivJrMSzEnsl+TJOyZYlkgDYjX5A1/2wS3oR6EMDaBAESZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZL8X6C/E0iyMwoAgIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBui9+snxh/60wmNIvr1d0sBsLMCAJC/AQBEvzslSTZEAQAQ/e6UJNkQBQBA9LtTkmRDFAAA0e9OSZINUQAARCdJkiRJkiRJkiRJkiRJkiRJkiT/a9C/Ld+5z08nNIrod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmG6P36ifGHRhH9+rulANhZAQDI3wAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACB63ClJsiEKAIDod6ckyYYoAACi352SJBuiAACITpIkSZIkSZIkSZIkSZIkSZIk/2vQvy3fuc9PJzSK6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIXq/fmL8oVFEv/5uKQB2VgAA8jcAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIfndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAot+dkiQbogAAiH53SpJsiAIAIPrdKUmyIQoAgOh3pyTJhigAAKLfnZIkG6IAAIh+d0qSbIgCACD63SlJsiEKAIDod6ckyYYoAACi352SJBuiAACIHndKkmyIAgAg+t0pSbIhCgCA6HenJMmGKAAAopMkSZIkSZIkSZIkSZIkSZIkSZIkSZL8R0EAICL/3YlJshsKAICofndKkuyIAgAgqt+dkiQ7ogAAiOp3pyTJjigAAKL63SlJsiMKAICofndKkuyIAgAgqt+dkiQ7ogAAiOp3pyTJjigAAKL63SlJsiMKAICofndKkuyIAgAgqt+dkiQ7ogAAiOp3pyTJjigAAKL63SlJsiMKAICofndKkuyIAgAgqt+dkiQ7ogAAiOp3pyTJjigAAKL63SlJsiMKAICofndKkuyIAgAgqt+dkiQ7ogAAiOp3pyTJjigAAKL63SlJsiMKAICofndKkuyIAgAgqt+dkiQ7ogAAiOp3pyTJjigAAKL63SlJsiMKAICofndKkuyI/gPwAYVR6rT3NAAAAABJRU5ErkJggg==" alt="A.P.E.X. Assessment BASE" style="height: 80px; width: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h1 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 0;">Become an A.P.E.X. Evaluator, or Apply to Join Our Worldwide Operations Team</h1>
+            </div>
+            
+            <!-- Is Your Area Available Button -->
+            <div style="text-align: center; margin-bottom: 8px;">
+                <button onclick="trackClick('check-availability'); openModal('availabilityModal')" style="background: #0891b2; color: white; border: none; padding: 14px 32px; border-radius: 25px; font-size: 16px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; font-family: 'Outfit', sans-serif;">
+                    🔍 Is Your Area & Sport Available?
+                </button>
+            </div>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <button class="what-is-link" onclick="trackClick('what-is-availability'); openModal('whatIsAvailabilityModal')" style="color: #666; text-decoration: underline; font-size: 13px; cursor: pointer; background: none; border: none;">What is this?</button>
+            </div>
+            
+            <!-- Join the #1 Athlete Health Initiative -->
+            <div style="text-align: center; margin-bottom: 15px;">
+                <h2 style="font-size: 26px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0;">Join the #1 Athlete Health Initiative in the World</h2>
+                <p style="color: #444; font-size: 15px; max-width: 850px; margin: 0 auto; line-height: 1.6;">AREA SCOUTS™, in partnership with The APEX Group, is launching the A.P.E.X. Assessment™ across 30,000+ high schools nationwide — and we're selecting qualified Coaches | Evaluators to provide athlete assessments across the country!</p>
+            </div>
+            
+            <!-- Quote -->
+            <p style="text-align: center; font-style: italic; color: #333; font-size: 15px; margin: 25px 0;">"Real development. Real foundations. Real results. Join the Area Scouts Mission, where health is the strategy, and performance is the result."</p>
+            
+            <!-- Choose your path -->
+            <p style="text-align: center; font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 20px 0;">👉 Choose your path and secure your placement.</p>
+            
+            <!-- Two Main CTA Buttons -->
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px;">
+                <button onclick="trackClick('apply-evaluator'); openModal('availabilityModal')" style="background: #16345f; color: white; border: none; padding: 16px 32px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif;">APPLY NOW - Become an A.P.E.X. Evaluator</button>
+                <button onclick="trackClick('apply-operations'); openModal('operationsModal')" style="background: #ed7023; color: white; border: none; padding: 16px 32px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif;">APPLY NOW - For a Full-Time Operations Role</button>
+            </div>
+            
+            <!-- What is this links -->
+            <div style="display: flex; gap: 200px; justify-content: center; margin-bottom: 30px;">
+                <button class="what-is-link" onclick="trackClick('what-is-evaluator'); openModal('whatIsStartNowModal')" style="color: #666; text-decoration: underline; font-size: 13px; cursor: pointer; background: none; border: none;">What is this?</button>
+                <button class="what-is-link" onclick="trackClick('what-is-operations'); openModal('whatIsOperationsModal')" style="color: #666; text-decoration: underline; font-size: 13px; cursor: pointer; background: none; border: none;">What is this?</button>
+            </div>
+            
+            <!-- Trusted By -->
+            <h3 style="text-align: center; font-size: 18px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px;">Trusted by over 3,000 Coaches Worldwide, Schools, Colleges,<br>Universities, Sports Professionals, and Sports Programs Nationwide</h3>
+            
+            <!-- Two Column Bullet Points -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px 60px; max-width: 900px; margin: 0 auto 30px auto;">
+                <div style="color: #333; font-size: 15px;">
+                    <p style="margin: 8px 0;">• Backed by Sports Medicine Experts</p>
+                    <p style="margin: 8px 0;">• Collaborating with the world's best from the<br>&nbsp;&nbsp;the NFL, NBA, MLB, NHL, and more</p>
+                </div>
+                <div style="color: #333; font-size: 15px;">
+                    <p style="margin: 8px 0;">• Partnered with The APEX Group, National Program</p>
+                    <p style="margin: 8px 0;">• Launching into 30,000+ U.S. High Schools</p>
+                    <p style="margin: 8px 0;">• Sponsorship program projected to reach 25M Athletes</p>
+                </div>
+            </div>
+            
+            <!-- Built By Section -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <p style="font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 5px;"><span style="color: #16345f;">AS</span> BUILT BY PROFESSIONAL SPORTS INDUSTRY LEADERS, SPORTS</p>
+                <p style="font-size: 16px; font-weight: 700; color: #ed7023; margin: 0;">MEDICINE DOCTORS, PROFESSIONAL ATHLETES, SCOUTS AND RECRUITERS</p>
+            </div>
+            
+            <!-- League Logos -->
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;">
+                <div style="width: 60px; height: 60px; background: white; border: 2px solid #16345f; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #16345f;">MLB</div>
+                <div style="width: 60px; height: 60px; background: #1a1a6c; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; color: white; text-align: center;">MINOR LEAGUE<br>BASEBALL</div>
+                <div style="width: 60px; height: 60px; background: #16345f; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white;">NFL</div>
+                <div style="width: 60px; height: 60px; background: #ed7023; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white;">NBA</div>
+                <div style="width: 60px; height: 60px; background: #c8102e; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: #ffc72c;">WNBA</div>
+                <div style="width: 60px; height: 60px; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white;">NHL</div>
+                <div style="width: 60px; height: 60px; background: white; border: 2px solid #16345f; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #16345f;">MLS</div>
+                <div style="width: 60px; height: 60px; background: #16345f; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white;">PLL</div>
+                <div style="width: 60px; height: 60px; background: #8b0000; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white;">MLR</div>
+                <div style="width: 60px; height: 60px; background: #16345f; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white;">PGA</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- DARK BACKGROUND SECTION FOR REST OF CONTENT -->
+    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); color: #f8fafc;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+
+            <!-- STATS BANNER -->
+            <section class="stats-banner" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #ed7023 0%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">33M</div>
+                    <div style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Youth Injuries/Year</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #ed7023 0%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">75M</div>
+                    <div style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Kids in Youth Sports</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #ed7023 0%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">52%</div>
+                    <div style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Quit Before High School</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #ed7023 0%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$79</div>
+                    <div style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Per Assessment</div>
+                </div>
+            </section>
+            
+            <!-- WAITLIST SECTION -->
+            <section style="padding: 30px 0; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                <p style="font-size: 16px; color: #94a3b8; margin-bottom: 20px;">Can't apply now? Join our waiting lists:</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                        <button onclick="trackClick('waitlist-apex'); openModal('waitlistApexModal')" style="background: transparent; border: 2px solid #ed7023; color: #ed7023; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif;">📋 Waiting List for APEX Evaluator</button>
+                        <button class="what-is-link" onclick="openModal('whatIsWaitlistApexModal')" style="color: #94a3b8; text-decoration: underline; font-size: 13px; cursor: pointer; background: none; border: none;">What is this?</button>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                        <button onclick="trackClick('waitlist-alert'); openModal('waitlistAlertReplyModal')" style="background: transparent; border: 2px solid #ffde59; color: #ffde59; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif;">📱 Waiting List for Alert Reply</button>
+                        <button class="what-is-link" onclick="openModal('whatIsWaitlistAlertModal')" style="color: #94a3b8; text-decoration: underline; font-size: 13px; cursor: pointer; background: none; border: none;">What is this?</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- DIRECTORS SECTION -->
+            <section style="padding: 30px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center;">🎯 33 Director of Sports Medicine Exposed Problems That Area Scouts is Solving</h3>
+                <div id="directorsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;"></div>
+            </section>
+            
+            <!-- CHAT/QUIZ SECTION -->
+            <section style="padding: 30px 0;">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+                    <h3 style="font-size: 20px; font-weight: 600;">🤖 APEX AI Agent - Ask Me Anything</h3>
+                    <div id="modeButtons" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="mode-btn active" data-mode="chat" style="padding: 10px 18px; border-radius: 12px; border: 1px solid #ed7023; background: linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(239,68,68,0.15) 100%); color: #fbbf24; font-weight: 500; font-size: 14px; cursor: pointer;">💬 Chat</button>
+                        <button class="mode-btn" data-mode="coach" style="padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); color: #94a3b8; font-weight: 500; font-size: 14px; cursor: pointer;">🎯 Coach</button>
+                        <button class="mode-btn" data-mode="quiz" style="padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); color: #94a3b8; font-weight: 500; font-size: 14px; cursor: pointer;">📝 Quiz</button>
+                        <button class="mode-btn" data-mode="learn" style="padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); color: #94a3b8; font-weight: 500; font-size: 14px; cursor: pointer;">📚 Learn</button>
+                    </div>
+                </div>
+                
+                <button id="knowledgeToggle" style="padding: 10px 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: #94a3b8; font-size: 14px; cursor: pointer; margin-bottom: 16px;">📖 Show Full Knowledge Base</button>
+                
+                <div id="knowledgePanel" style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; max-height: 400px; overflow-y: auto; font-size: 14px; line-height: 1.8; color: #94a3b8; display: none; margin-bottom: 20px;"></div>
+                
+                <div id="chatContainer" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden;">
+                    <div id="messagesArea" style="padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; max-height: 450px; min-height: 300px;"></div>
+                    <div id="quickPrompts" style="padding: 12px 20px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 8px; flex-wrap: wrap; background: rgba(0,0,0,0.2);"></div>
+                    <div style="padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 12px; align-items: flex-end; background: rgba(0,0,0,0.3);">
+                        <textarea id="inputField" placeholder="Ask me anything about APEX, assessments, or becoming an evaluator..." rows="1" style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 18px; color: #f8fafc; font-size: 15px; resize: none; outline: none; font-family: 'Outfit', sans-serif;"></textarea>
+                        <button id="sendBtn" style="background: linear-gradient(135deg, #ed7023 0%, #ef4444 100%); border: none; border-radius: 12px; padding: 14px 28px; color: white; font-weight: 600; font-size: 15px; cursor: pointer;">Send</button>
+                    </div>
+                </div>
+                
+                <div id="quizContainer" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                        <span>Question <span id="questionNum">1</span> of <span id="totalQuestions">5</span></span>
+                        <span style="font-family: 'Space Mono', monospace; color: #ed7023;">Score: <span id="score">0</span></span>
+                    </div>
+                    <div id="quizQuestion" style="font-size: 18px; font-weight: 600; margin-bottom: 20px; line-height: 1.5;"></div>
+                    <div id="quizOptions" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                    <div id="quizFeedback" style="margin-top: 20px; padding: 16px; border-radius: 12px; font-size: 14px; line-height: 1.6; display: none;"></div>
+                    <button id="nextBtn" style="background: linear-gradient(135deg, #ed7023 0%, #ef4444 100%); border: none; border-radius: 10px; padding: 12px 24px; color: white; font-weight: 600; cursor: pointer; margin-top: 16px; display: none;">Next Question →</button>
+                </div>
+            </section>
+            
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <footer style="padding: 30px 0; text-align: center; color: #94a3b8; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <div class="container">
+            Built from the official APEX Presentation • <a href="https://athletedevelopment.ai" target="_blank" style="color: #ed7023; text-decoration: none;">athletedevelopment.ai</a> • Area Scouts since 2011<br>
+            <span style="margin-top: 8px; display: inline-block;">🏆 Mission: Combat the 33 million youth sports injuries per year</span>
+        </div>
+    </footer>
+    <!-- What Is This Modals -->
+    <div class="modal-overlay" id="whatIsStartNowModal">
+        <div class="modal small">
+            <div class="modal-header">
+                <h2>ðŸš€ START NOW â€“ Become an Evaluator</h2>
+                <button class="modal-close" onclick="closeModal('whatIsStartNowModal')">&times;</button>
+            </div>
+            <div class="what-is-content" id="whatIsStartNowContent"></div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="whatIsAvailabilityModal">
+        <div class="modal small">
+            <div class="modal-header">
+                <h2>ðŸ” Is Your Area & Sport Available?</h2>
+                <button class="modal-close" onclick="closeModal('whatIsAvailabilityModal')">&times;</button>
+            </div>
+            <div class="what-is-content" id="whatIsAvailabilityContent"></div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="whatIsWaitlistApexModal">
+        <div class="modal small">
+            <div class="modal-header">
+                <h2>ðŸ“‹ APEX Evaluator Waiting List</h2>
+                <button class="modal-close" onclick="closeModal('whatIsWaitlistApexModal')">&times;</button>
+            </div>
+            <div class="what-is-content" id="whatIsWaitlistApexContent"></div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="whatIsWaitlistAlertModal">
+        <div class="modal small">
+            <div class="modal-header">
+                <h2>ðŸ“± Alert Reply Waiting List</h2>
+                <button class="modal-close" onclick="closeModal('whatIsWaitlistAlertModal')">&times;</button>
+            </div>
+            <div class="what-is-content" id="whatIsWaitlistAlertContent"></div>
+        </div>
+    </div>
+    
+    <!-- Admin Login Modal -->
+    <div class="modal-overlay" id="adminLoginModal">
+        <div class="modal small">
+            <div class="modal-header">
+                <h2>ðŸ” Admin Login</h2>
+                <button class="modal-close" onclick="closeModal('adminLoginModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password" onkeypress="if(event.key==='Enter')verifyAdmin()">
+            </div>
+            <button class="btn-primary" onclick="verifyAdmin()" style="width: 100%;">Login</button>
+            <p id="adminError" style="color: #ef4444; font-size: 13px; margin-top: 12px; display: none;">Incorrect password</p>
+        </div>
+    </div>
+    
+    <!-- Admin Dashboard Modal -->
+    <div class="modal-overlay" id="adminDashboardModal">
+        <div class="modal large">
+            <div class="modal-header">
+                <h2>ðŸ“Š Admin Dashboard</h2>
+                <button class="modal-close" onclick="closeModal('adminDashboardModal')">&times;</button>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="showAdminTab('overview')">ðŸ“ˆ Overview</button>
+                <button class="admin-tab" onclick="showAdminTab('clicks')">ðŸ–±ï¸ Clicks</button>
+                <button class="admin-tab" onclick="showAdminTab('sessions')">ðŸ‘¤ Sessions</button>
+                <button class="admin-tab" onclick="showAdminTab('reservations')">âœ… Reservations</button>
+                <button class="admin-tab" onclick="showAdminTab('formOpens')">ðŸ“ Forms</button>
+                <button class="admin-tab" onclick="showAdminTab('availChecks')">ðŸ” Availability</button>
+                <button class="admin-tab" onclick="showAdminTab('whatIsEdit')">âœï¸ Edit "What Is"</button>
+            </div>
+            
+            <div class="admin-section active" id="tab-overview">
+                <div class="admin-grid" id="overviewStats"></div>
+            </div>
+            
+            <div class="admin-section" id="tab-clicks">
+                <div style="margin-bottom: 16px;">
+                    <button class="export-btn" onclick="exportData('clicks')">ðŸ“¥ Export CSV</button>
+                    <button class="clear-btn" onclick="clearData('clicks')">ðŸ—‘ï¸ Clear</button>
+                </div>
+                <div style="overflow-x: auto; max-height: 400px;">
+                    <table class="admin-table" id="clicksTable">
+                        <thead><tr><th>Button</th><th>Timestamp</th><th>Session</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="admin-section" id="tab-sessions">
+                <div style="margin-bottom: 16px;">
+                    <button class="export-btn" onclick="exportData('sessions')">ðŸ“¥ Export CSV</button>
+                    <button class="clear-btn" onclick="clearData('sessions')">ðŸ—‘ï¸ Clear</button>
+                </div>
+                <div style="overflow-x: auto; max-height: 400px;">
+                    <table class="admin-table" id="sessionsTable">
+                        <thead><tr><th>Session ID</th><th>Started</th><th>Duration</th><th>Clicks</th><th>Device</th><th>Referrer</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="admin-section" id="tab-reservations">
+                <div style="margin-bottom: 16px;">
+                    <button class="export-btn" onclick="exportData('reservations')">ðŸ“¥ Export CSV</button>
+                    <button class="clear-btn" onclick="clearData('reservations')">ðŸ—‘ï¸ Clear</button>
+                </div>
+                <div style="overflow-x: auto; max-height: 400px;">
+                    <table class="admin-table" id="reservationsTable">
+                        <thead><tr><th>Auth Code</th><th>State</th><th>Zip</th><th>Sport</th><th>Timestamp</th><th>Status</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="admin-section" id="tab-formOpens">
+                <div style="margin-bottom: 16px;">
+                    <button class="export-btn" onclick="exportData('formOpens')">ðŸ“¥ Export CSV</button>
+                    <button class="clear-btn" onclick="clearData('formOpens')">ðŸ—‘ï¸ Clear</button>
+                </div>
+                <div style="overflow-x: auto; max-height: 400px;">
+                    <table class="admin-table" id="formOpensTable">
+                        <thead><tr><th>Form</th><th>Timestamp</th><th>Session</th><th>Time Spent</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="admin-section" id="tab-availChecks">
+                <div style="margin-bottom: 16px;">
+                    <button class="export-btn" onclick="exportData('availChecks')">ðŸ“¥ Export CSV</button>
+                    <button class="clear-btn" onclick="clearData('availChecks')">ðŸ—‘ï¸ Clear</button>
+                </div>
+                <div style="overflow-x: auto; max-height: 400px;">
+                    <table class="admin-table" id="availChecksTable">
+                        <thead><tr><th>State</th><th>Zip</th><th>Sport</th><th>Result</th><th>Proceeded</th><th>Timestamp</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="admin-section" id="tab-whatIsEdit">
+                <h4 style="margin-bottom: 16px; color: var(--orange);">Edit "What is this?" Content for Each Button</h4>
+                <div class="form-group">
+                    <label>ðŸš€ START NOW â€“ Become an Evaluator</label>
+                    <textarea id="editWhatIsStartNow" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>ðŸ” Is Your Area & Sport Available?</label>
+                    <textarea id="editWhatIsAvailability" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>ðŸ“‹ APEX Evaluator Waiting List</label>
+                    <textarea id="editWhatIsWaitlistApex" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>ðŸ“± Alert Reply Waiting List</label>
+                    <textarea id="editWhatIsWaitlistAlert" rows="4"></textarea>
+                </div>
+                <button class="save-btn" onclick="saveWhatIsContent()">ðŸ’¾ Save All Changes</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Availability Check Modal -->
+    <div class="modal-overlay" id="availabilityModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>ðŸ” Check Your Area & Sport Availability</h2>
+                <button class="modal-close" onclick="closeModal('availabilityModal')">&times;</button>
+            </div>
+            
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Exclusive territories are first-come, first-served. Check if your area is still open!</p>
+            
+            <div id="availabilityForm">
+                <div class="form-group">
+                    <label>State *</label>
+                    <select id="avail_state" required>
+                        <option value="">Select State...</option>
+                        <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida</option>
+                        <option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Postal Code (5 digits) *</label>
+                    <input type="text" id="avail_zip" placeholder="33066" maxlength="5">
+                </div>
+                
+                <div class="form-group">
+                    <label>Primary Sport *</label>
+                    <select id="avail_sport" required>
+                        <option value="">Select Sport...</option>
+                        <option value="BASEBALL">BASEBALL</option>
+                        <option value="BASKETBALL_MENS">BASKETBALL (MENS)</option>
+                        <option value="BASKETBALL_WOMENS">BASKETBALL (WOMENS)</option>
+                        <option value="FOOTBALL">FOOTBALL</option>
+                        <option value="SOCCER_MENS">SOCCER (MENS)</option>
+                        <option value="SOCCER_WOMENS">SOCCER (WOMENS)</option>
+                        <option value="SOFTBALL">SOFTBALL</option>
+                        <option value="VOLLEYBALL">VOLLEYBALL</option>
+                        <option value="TRACK_FIELD">TRACK AND FIELD</option>
+                        <option value="SWIMMING">SWIMMING</option>
+                        <option value="WRESTLING">WRESTLING</option>
+                        <option value="GOLF">GOLF</option>
+                        <option value="TENNIS">TENNIS</option>
+                        <option value="LACROSSE">LACROSSE</option>
+                        <option value="HOCKEY">HOCKEY</option>
+                        <option value="CROSS_COUNTRY">CROSS COUNTRY</option>
+                        <option value="GYMNASTICS">GYMNASTICS</option>
+                        <option value="CHEERLEADING">CHEERLEADING</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+                </div>
+                
+                <button class="btn-secondary" onclick="checkAvailability()" style="width: 100%;">
+                    ðŸ” Check Availability Now
+                </button>
+            </div>
+            
+            <div class="result-box available" id="resultAvailable">
+                <h3 style="color: var(--green);">ðŸŽ‰ GREAT NEWS!</h3>
+                <p id="availableText" style="margin-top: 8px;"></p>
+                <div style="margin-top: 20px;">
+                    <button class="btn-primary" onclick="trackClick('ready-to-secure'); showPaymentStep()" style="width: 100%; margin-bottom: 12px;">
+                        âœ… YES! I'm Ready to Secure It NOW!
+                    </button>
+                    <button class="btn-outline" onclick="resetAvailability()" style="width: 100%;">
+                        ðŸ”„ Search Another Area/Sport
+                    </button>
+                </div>
+            </div>
+            
+            <div class="result-box unavailable" id="resultUnavailable">
+                <h3 style="color: #ef4444;">ðŸ˜” Territory Currently Taken</h3>
+                <p id="unavailableText" style="margin-top: 8px;"></p>
+                <div style="margin-top: 20px;">
+                    <button class="btn-secondary" onclick="trackClick('join-waitlist-from-unavailable'); closeModal('availabilityModal'); openModal('waitlistApexModal');" style="width: 100%; margin-bottom: 12px;">
+                        ðŸ“‹ Join APEX Evaluator Waiting List
+                    </button>
+                    <button class="btn-outline" onclick="resetAvailability()" style="width: 100%;">
+                        ðŸ”„ Search Another Area/Sport
+                    </button>
+                </div>
+            </div>
+            
+            <div id="paymentStep" style="display: none;">
+                <h3 style="margin-bottom: 16px;">ðŸ’³ Step 1: Secure Your Territory</h3>
+                <div class="payment-breakdown">
+                    <div class="payment-item"><span>Initial Background Check</span><span>$79</span></div>
+                    <div class="payment-item"><span>Onboard | Setup (One-Time)</span><span>$25</span></div>
+                    <div class="payment-item"><span>Postal Code Fee (Monthly)</span><span>$15</span></div>
+                    <div class="payment-item payment-total"><span>TOTAL</span><span>$119</span></div>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); text-align: center;">*100% Refundable if Application is Denied</p>
+                <button class="btn-primary" onclick="trackClick('proceed-to-stripe'); openStripePayment()" style="width: 100%; margin-top: 16px;">
+                    ðŸ’³ Proceed to Secure Payment
+                </button>
+                <button class="btn-secondary" onclick="trackClick('payment-complete'); showBackgroundCheckStep()" style="width: 100%; margin-top: 12px;">
+                    âœ… I've Completed My Payment â€“ Continue
+                </button>
+            </div>
+            
+            <div id="backgroundCheckStep" style="display: none;">
+                <h3 style="margin-bottom: 16px;">ðŸ“‹ Step 2: Complete Background Check</h3>
+                <p style="color: var(--text-muted); margin-bottom: 16px;">Please complete the form below.</p>
+                <div class="embed-container">
+                    <iframe src="https://go.areascouts.com/widget/form/DbuRv7JtBoCqIIQatU2V" 
+                            style="width:100%;height:800px;border:none;" 
+                            id="inline-DbuRv7JtBoCqIIQatU2V"></iframe>
+                </div>
+                <button class="btn-primary" onclick="trackClick('background-complete'); confirmBackgroundComplete()" style="width: 100%; margin-top: 16px;">
+                    âœ… I've Completed the Background Check
+                </button>
+            </div>
+            
+            <div id="confirmationStep" style="display: none;">
+                <div class="confirmation-box">
+                    <h3 style="color: var(--green);">ðŸŽ‰ TERRITORY RESERVED!</h3>
+                    <div class="auth-code">
+                        <div class="label">AUTHORIZATION CODE</div>
+                        <div class="code" id="authCodeDisplay">AS-XXXXXX</div>
+                    </div>
+                    <div class="auth-code">
+                        <div class="label">DATE & TIME STAMP</div>
+                        <div class="code" style="font-size: 14px;" id="timestampDisplay"></div>
+                    </div>
+                    <p style="margin-top: 16px; color: var(--text-muted);">Our team will contact you within 24-48 hours.</p>
+                </div>
+                <button class="btn-primary" onclick="closeModal('availabilityModal'); location.reload();" style="width: 100%; margin-top: 20px;">
+                    âœ… Got It - Return to Main Page
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- APEX Waiting List Modal -->
+    <div class="modal-overlay" id="waitlistApexModal">
+        <div class="modal" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2>ðŸ“‹ APEX Evaluator Waiting List</h2>
+                <button class="modal-close" onclick="closeWaitlistModal('waitlistApexModal', 'APEX Evaluator Waiting List')">&times;</button>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">For if Area/Sport are taken, or if you wish to wait to apply.</p>
+            <div class="embed-container">
+                <iframe src="https://go.areascouts.com/widget/form/ss2jusRoOix6l5GlstNj" 
+                        style="width:100%;height:856px;border:none;" 
+                        id="inline-ss2jusRoOix6l5GlstNj"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Alert Reply Waiting List Modal -->
+    <div class="modal-overlay" id="waitlistAlertReplyModal">
+        <div class="modal" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2>ðŸ“± Alert Reply Waiting List</h2>
+                <button class="modal-close" onclick="closeWaitlistModal('waitlistAlertReplyModal', 'Alert Reply Waiting List')">&times;</button>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">Be the first to know when our Alert Reply app launches!</p>
+            <div class="embed-container">
+                <iframe src="https://go.areascouts.com/widget/form/t8zb5LCz3nr0NvsRoIaH" 
+                        style="width:100%;height:1089px;border:none;" 
+                        id="inline-t8zb5LCz3nr0NvsRoIaH"></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Operations Role Modal -->
+    <div class="modal-overlay" id="operationsModal">
+        <div class="modal" style="background: linear-gradient(135deg, #1a2d4a 0%, #0f172a 100%); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; max-width: 650px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 32px;">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: #f8fafc;">🚀 Apply for Full-Time Operations Role</h2>
+                <button class="modal-close" onclick="closeModal('operationsModal')" style="background: none; border: none; color: #94a3b8; font-size: 28px; cursor: pointer;">&times;</button>
+            </div>
+            <p style="color: #94a3b8; margin-bottom: 20px;">Join the Area Scouts operations team and help us reach 30,000+ high schools nationwide.</p>
+            <div class="embed-container" style="background: white; border-radius: 8px; min-height: 500px;">
+                <iframe src="https://go.areascouts.com/widget/form/ss2jusRoOix6l5GlstNj" style="width:100%;height:600px;border:none;"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <!-- What Is Operations Modal -->
+    <div class="modal-overlay" id="whatIsOperationsModal">
+        <div class="modal small" style="background: linear-gradient(135deg, #1a2d4a 0%, #0f172a 100%); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; max-width: 500px; width: 100%; padding: 32px;">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: #f8fafc;">🚀 Full-Time Operations Role</h2>
+                <button class="modal-close" onclick="closeModal('whatIsOperationsModal')" style="background: none; border: none; color: #94a3b8; font-size: 28px; cursor: pointer;">&times;</button>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 20px; line-height: 1.7; color: #94a3b8;">
+                <h3 style="color: #ed7023; margin-bottom: 12px;">Join Our Operations Team</h3>
+                <p>We're building a nationwide operations team to support the launch of A.P.E.X. assessments across 30,000+ high schools.</p>
+                <p style="margin-top: 12px;"><strong style="color: #f8fafc;">Positions include:</strong></p>
+                <ul style="padding-left: 20px; margin-top: 8px;">
+                    <li>Regional Directors</li>
+                    <li>State Coordinators</li>
+                    <li>Training Specialists</li>
+                    <li>Support Staff</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://go.areascouts.com/js/form_embed.js"></script>
+    <script>
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+        const CONFIG = {
+            adminPassword: 'AS_AREA_2026_GFYLJBLA_Rest#',
+            stripeLink: 'https://buy.stripe.com/5kQ28k6uF4e4dRD0KA33W11'
+        };
+        
+        // Directors data
+        const DIRECTORS = [
+            "Chris Snyder - Arizona State", "Jeff Allen - Ball State", "Chris Devaney - Baylor",
+            "Joe Londergan - Boston College", "Denny Kellington - Central Michigan", "Lindsey McLean - Cincinnati",
+            "John Cantwell - Columbia", "Alex Warren - Delaware", "Yosh Hishiki - Georgia",
+            "Dave Granito - Houston", "Barry Helmer - Indiana State", "Tom Edathil - Kennesaw State",
+            "James Madaleno - Maryland", "John Hill - New Mexico", "Michael Kelly - Norfolk State",
+            "Dave Nolan - Northwestern", "Ben Albin - Ohio", "Jason Bennett - Oregon State",
+            "George Roberts - Pittsburgh", "Mike Cosgrave - Purdue", "Robert Mays - Rice",
+            "Aaron Craft - San Jose State", "Mike Hanson - South Dakota", "Alicia Spalding - Southern Indiana",
+            "Kent Sommerfeldt - Southern Utah", "Matt Balis - Syracuse", "Kevin Bastin - Texas State",
+            "Brian Chandler - Troy", "Danny Foster - Tulane", "Jeremy Busch - Utah",
+            "Andy Kessler - Valparaiso", "Chris Peduzzi - Wake Forest", "Tony Spinella - Wright State"
+        ];
+        
+        // Default "What Is This?" content
+        const DEFAULT_WHAT_IS = {
+            startNow: '<h3 style="color: #ed7023; margin-bottom: 12px;">Become an A.P.E.X. Evaluator</h3><p>Start your journey to become a certified A.P.E.X. Evaluator in your area. As an evaluator, you will conduct NFL-grade movement assessments (B.A.S.E.) for youth athletes.</p><ul style="padding-left: 20px; margin-top: 12px;"><li>Exclusive territory rights</li><li>Comprehensive training</li><li>$79 per athlete assessment</li></ul>',
+            availability: '<h3 style="color: #ed7023; margin-bottom: 12px;">Check Territory Availability</h3><p>Territories are assigned exclusively on a first-come, first-served basis. Only ONE evaluator per postal code per sport is permitted.</p>',
+            waitlistApex: '<h3 style="color: #ed7023; margin-bottom: 12px;">APEX Evaluator Waiting List</h3><p>If your desired territory is already taken, join our waiting list to be notified when it becomes available.</p>',
+            waitlistAlert: '<h3 style="color: #ed7023; margin-bottom: 12px;">Alert Reply App - Coming Soon!</h3><p>Alert Reply is our upcoming mobile app for streamlined communication between evaluators, athletes, and coaches.</p>'
+        };
+        
+        // ============================================
+        // DATA STORAGE
+        // ============================================
+        let data = {
+            clicks: JSON.parse(localStorage.getItem('apex_clicks')) || [],
+            sessions: JSON.parse(localStorage.getItem('apex_sessions')) || [],
+            reservations: JSON.parse(localStorage.getItem('apex_reservations')) || [],
+            formOpens: JSON.parse(localStorage.getItem('apex_formOpens')) || [],
+            availChecks: JSON.parse(localStorage.getItem('apex_availChecks')) || [],
+            whatIs: JSON.parse(localStorage.getItem('apex_whatIs')) || DEFAULT_WHAT_IS
+        };
+        
+        function saveData(key) { localStorage.setItem('apex_' + key, JSON.stringify(data[key])); }
+        
+        // Load directors
+        function loadDirectors() {
+            const grid = document.getElementById('directorsGrid');
+            if (grid) {
+                grid.innerHTML = DIRECTORS.map(d => {
+                    const [name, school] = d.split(' - ');
+                    return `<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #94a3b8;"><strong style="color: #f8fafc;">${name}</strong> - ${school}</div>`;
+                }).join('');
+            }
+        }
+        
+        // Load "What Is" content
+        function loadWhatIsContent() {
+            const el1 = document.getElementById('whatIsStartNowContent');
+            const el2 = document.getElementById('whatIsAvailabilityContent');
+            const el3 = document.getElementById('whatIsWaitlistApexContent');
+            const el4 = document.getElementById('whatIsWaitlistAlertContent');
+            if (el1) el1.innerHTML = data.whatIs.startNow;
+            if (el2) el2.innerHTML = data.whatIs.availability;
+            if (el3) el3.innerHTML = data.whatIs.waitlistApex;
+            if (el4) el4.innerHTML = data.whatIs.waitlistAlert;
+        }
+        
+        // ============================================
+        // SESSION TRACKING
+        // ============================================
+        let currentSession = {
+            id: 'S-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
+            started: new Date().toISOString(),
+            clicks: 0,
+            device: /Mobile|Android|iPhone/.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
+        };
+        data.sessions.push({...currentSession});
+        saveData('sessions');
+        
+        // ============================================
+        // CLICK TRACKING
+        // ============================================
+        function trackClick(buttonName) {
+            currentSession.clicks++;
+            data.clicks.push({ button: buttonName, timestamp: new Date().toISOString(), sessionId: currentSession.id });
+            saveData('clicks');
+        }
+        
+        // ============================================
+        // MODAL FUNCTIONS
+        // ============================================
+        function openModal(id) { document.getElementById(id)?.classList.add('active'); }
+        function closeModal(id) { document.getElementById(id)?.classList.remove('active'); }
+        
+        // ============================================
+        // AVAILABILITY FLOW
+        // ============================================
+        let currentAvailability = {};
+        
+        function checkAvailability() {
+            const state = document.getElementById('avail_state')?.value;
+            const zip = document.getElementById('avail_zip')?.value.trim();
+            const sport = document.getElementById('avail_sport')?.value;
+            if (!state || !zip || !sport) { alert('Please fill all fields'); return; }
+            if (!/^\d{5}$/.test(zip)) { alert('Postal Code must be 5 digits'); return; }
+            currentAvailability = { state, zip, sport };
+            const isAvailable = Math.random() > 0.2;
+            data.availChecks.push({ state, postalCode: zip, sport, result: isAvailable ? 'Available' : 'Unavailable', timestamp: new Date().toISOString() });
+            saveData('availChecks');
+            document.getElementById('availabilityForm').style.display = 'none';
+            if (isAvailable) {
+                document.getElementById('availableText').textContent = `${sport.replace(/_/g,' ')} is AVAILABLE in ${zip}, ${state}!`;
+                document.getElementById('resultAvailable').classList.add('active');
+            } else {
+                document.getElementById('unavailableText').textContent = `${sport.replace(/_/g,' ')} in ${zip}, ${state} is taken.`;
+                document.getElementById('resultUnavailable').classList.add('active');
+            }
+        }
+        
+        function resetAvailability() {
+            document.getElementById('availabilityForm').style.display = 'block';
+            document.getElementById('resultAvailable')?.classList.remove('active');
+            document.getElementById('resultUnavailable')?.classList.remove('active');
+            document.getElementById('paymentStep') && (document.getElementById('paymentStep').style.display = 'none');
+            document.getElementById('backgroundCheckStep') && (document.getElementById('backgroundCheckStep').style.display = 'none');
+            document.getElementById('confirmationStep') && (document.getElementById('confirmationStep').style.display = 'none');
+        }
+        
+        function showPaymentStep() {
+            document.getElementById('resultAvailable')?.classList.remove('active');
+            document.getElementById('paymentStep') && (document.getElementById('paymentStep').style.display = 'block');
+        }
+        
+        function openStripePayment() { window.open(CONFIG.stripeLink, '_blank'); }
+        
+        function showBackgroundCheckStep() {
+            document.getElementById('paymentStep') && (document.getElementById('paymentStep').style.display = 'none');
+            document.getElementById('backgroundCheckStep') && (document.getElementById('backgroundCheckStep').style.display = 'block');
+        }
+        
+        function confirmBackgroundComplete() {
+            const authCode = 'AS-' + Math.random().toString(36).substring(2,8).toUpperCase();
+            const timestamp = new Date().toLocaleString();
+            data.reservations.push({ authCode, timestamp, ...currentAvailability, status: 'Pending' });
+            saveData('reservations');
+            document.getElementById('authCodeDisplay') && (document.getElementById('authCodeDisplay').textContent = authCode);
+            document.getElementById('timestampDisplay') && (document.getElementById('timestampDisplay').textContent = timestamp);
+            document.getElementById('backgroundCheckStep') && (document.getElementById('backgroundCheckStep').style.display = 'none');
+            document.getElementById('confirmationStep') && (document.getElementById('confirmationStep').style.display = 'block');
+        }
+        
+        // ============================================
+        // CHAT/QUIZ FUNCTIONALITY
+        // ============================================
+        const knowledgeBase = {
+            apex: { keywords: ['apex', 'what is', 'explain', 'about'], response: '**APEX** stands for **Athlete Performance Evaluation Index**.\n\nThe "X" represents the "X factor" — proprietary data collected by evaluators.\n\n• Collaborative group of sports professionals\n• Goal: Get into 30,000+ high schools\n• Focus: Combat 33 million youth injuries/year' },
+            problem: { keywords: ['problem', 'injuries', 'crisis', '33 million'], response: '**The Youth Sports Injury Epidemic:**\n\n• **33 million injuries per year**\n• Only 75 million kids play youth sports\n• **52% quit** before high school\n• ACL injuries in girls at historic highs' },
+            evaluator: { keywords: ['evaluator', 'become', 'join', 'how to', 'apply'], response: '**How to Become an APEX Evaluator:**\n\n• Background check required\n• 2 years coaching experience\n• **$79 per athlete** assessment\n• Up to 10 athletes per session\n• **100% of money goes to YOU**' },
+            money: { keywords: ['money', 'pay', 'earn', '$79'], response: '**Evaluator Compensation:**\n\n• **$79 per athlete**\n• Up to **10 athletes per session = $790**\n• ~90 minutes per session\n• **100% goes directly to you**' }
+        };
+        
+        const defaultResponse = "I'm here to help! Ask about:\n• What is APEX?\n• The injury problem\n• Becoming an evaluator\n• Compensation ($79/athlete)";
+        
+        const quizQuestions = [
+            { question: "What does APEX stand for?", options: ["Athlete Performance Evaluation Index", "Athletic Program Excellence Index", "Advanced Physical Exercise Index", "Athlete Potential Excellence Index"], correct: 0, explanation: "APEX = Athlete Performance Evaluation Index" },
+            { question: "How many youth sports injuries occur per year?", options: ["5 million", "15 million", "33 million", "50 million"], correct: 2, explanation: "33 million injuries per year!" },
+            { question: "How much does an evaluator earn per athlete?", options: ["$49", "$79", "$99", "$149"], correct: 1, explanation: "$79 per athlete assessment" },
+            { question: "What percentage quit before high school?", options: ["25%", "38%", "52%", "67%"], correct: 2, explanation: "52% quit before JV/varsity level" },
+            { question: "What does BASE stand for?", options: ["Balance, Agility, Strength, Endurance", "Biomechanics, Athleticism, Sequence, Endurance", "Body, Athletic, Speed, Energy", "Basic Athletic Skill Evaluation"], correct: 1, explanation: "BASE = Biomechanics, Athleticism, Sequence, Endurance" }
+        ];
+        
+        const quickPrompts = {
+            chat: ["What is APEX?", "How do I become an evaluator?", "How much can I earn?"],
+            coach: ["Walk me through my first assessment", "How do I approach school ADs?"],
+            quiz: ["Start the quiz!"],
+            learn: ["Show the knowledge base", "Who are the experts?"]
+        };
+        
+        let currentMode = 'chat';
+        let quizState = { currentQuestion: 0, score: 0, answered: false };
+        
+        function findBestResponse(query) {
+            const lowerQuery = query.toLowerCase();
+            let bestMatch = null, bestScore = 0;
+            for (const [key, data] of Object.entries(knowledgeBase)) {
+                let score = 0;
+                for (const keyword of data.keywords) {
+                    if (lowerQuery.includes(keyword)) score += keyword.length;
+                }
+                if (score > bestScore) { bestScore = score; bestMatch = data.response; }
+            }
+            return bestMatch || defaultResponse;
+        }
+        
+        function addMessage(content, isUser = false) {
+            const area = document.getElementById('messagesArea');
+            if (!area) return;
+            const div = document.createElement('div');
+            div.style.cssText = isUser ? 
+                'background: linear-gradient(135deg, #ed7023 0%, #ef4444 100%); color: white; margin-left: auto; border-radius: 20px 20px 4px 20px; max-width: 85%; padding: 16px 20px; font-size: 15px; line-height: 1.7;' :
+                'background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px 20px 20px 4px; max-width: 85%; padding: 16px 20px; font-size: 15px; line-height: 1.7; color: #f8fafc;';
+            div.innerHTML = content.replace(/\*\*(.*?)\*\*/g, '<strong style="color: #fbbf24;">$1</strong>').replace(/\n/g, '<br>');
+            area.appendChild(div);
+            area.scrollTop = area.scrollHeight;
+        }
+        
+        function handleSend() {
+            const input = document.getElementById('inputField');
+            if (!input) return;
+            const query = input.value.trim();
+            if (!query) return;
+            addMessage(query, true);
+            input.value = '';
+            setTimeout(() => addMessage(findBestResponse(query)), 500);
+        }
+        
+        function updateQuickPrompts() {
+            const container = document.getElementById('quickPrompts');
+            if (!container) return;
+            container.innerHTML = '';
+            (quickPrompts[currentMode] || quickPrompts.chat).forEach(prompt => {
+                const btn = document.createElement('button');
+                btn.style.cssText = 'padding: 8px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); color: #94a3b8; font-size: 13px; cursor: pointer; white-space: nowrap;';
+                btn.textContent = prompt;
+                btn.onclick = () => {
+                    if (prompt.includes('quiz')) startQuiz();
+                    else if (prompt.includes('knowledge')) {
+                        const panel = document.getElementById('knowledgePanel');
+                        if (panel) panel.style.display = 'block';
+                    } else {
+                        document.getElementById('inputField').value = prompt;
+                        handleSend();
+                    }
+                };
+                container.appendChild(btn);
+            });
+        }
+        
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                const isActive = btn.dataset.mode === mode;
+                btn.style.background = isActive ? 'linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(239,68,68,0.15) 100%)' : 'rgba(255,255,255,0.03)';
+                btn.style.borderColor = isActive ? '#ed7023' : 'rgba(255,255,255,0.08)';
+                btn.style.color = isActive ? '#fbbf24' : '#94a3b8';
+            });
+            const messagesArea = document.getElementById('messagesArea');
+            if (messagesArea) messagesArea.innerHTML = '';
+            const chatContainer = document.getElementById('chatContainer');
+            const quizContainer = document.getElementById('quizContainer');
+            if (mode === 'quiz') {
+                if (chatContainer) chatContainer.style.display = 'none';
+                if (quizContainer) quizContainer.style.display = 'block';
+                startQuiz();
+            } else {
+                if (chatContainer) chatContainer.style.display = 'block';
+                if (quizContainer) quizContainer.style.display = 'none';
+                const welcomes = {
+                    chat: "Hey! 👋 I'm an **APEX Agent**. Ask me anything about the #1 Athlete Health Initiative!",
+                    coach: "Welcome to **Coaching Mode**! 🎯 I'll guide you step-by-step.",
+                    learn: "Welcome to **Learning Mode**! 📚 Click 'Show Knowledge Base' to explore."
+                };
+                addMessage(welcomes[mode] || welcomes.chat);
+            }
+            updateQuickPrompts();
+        }
+        
+        function startQuiz() {
+            quizState = { currentQuestion: 0, score: 0, answered: false };
+            showQuestion();
+        }
+        
+        function showQuestion() {
+            const q = quizQuestions[quizState.currentQuestion];
+            document.getElementById('questionNum').textContent = quizState.currentQuestion + 1;
+            document.getElementById('totalQuestions').textContent = quizQuestions.length;
+            document.getElementById('score').textContent = quizState.score;
+            document.getElementById('quizQuestion').textContent = q.question;
+            document.getElementById('quizFeedback').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const div = document.createElement('div');
+                div.style.cssText = 'padding: 16px 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; cursor: pointer; font-size: 15px; color: #f8fafc;';
+                div.textContent = option;
+                div.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(div);
+            });
+            quizState.answered = false;
+        }
+        
+        function selectAnswer(index) {
+            if (quizState.answered) return;
+            quizState.answered = true;
+            const q = quizQuestions[quizState.currentQuestion];
+            const options = document.querySelectorAll('#quizOptions > div');
+            const feedback = document.getElementById('quizFeedback');
+            options.forEach((opt, i) => {
+                if (i === q.correct) { opt.style.background = 'rgba(34,197,94,0.2)'; opt.style.borderColor = '#22c55e'; }
+                else if (i === index && index !== q.correct) { opt.style.background = 'rgba(239,68,68,0.2)'; opt.style.borderColor = '#ef4444'; }
+            });
+            if (index === q.correct) {
+                quizState.score++;
+                document.getElementById('score').textContent = quizState.score;
+                feedback.style.cssText = 'margin-top: 20px; padding: 16px; border-radius: 12px; display: block; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #f8fafc;';
+                feedback.innerHTML = `<strong>✓ Correct!</strong> ${q.explanation}`;
+            } else {
+                feedback.style.cssText = 'margin-top: 20px; padding: 16px; border-radius: 12px; display: block; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #f8fafc;';
+                feedback.innerHTML = `<strong>✗ Not quite.</strong> ${q.explanation}`;
+            }
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').textContent = quizState.currentQuestion < quizQuestions.length - 1 ? 'Next Question →' : 'See Results';
+        }
+        
+        function nextQuestion() {
+            if (quizState.currentQuestion < quizQuestions.length - 1) {
+                quizState.currentQuestion++;
+                showQuestion();
+            } else {
+                const pct = Math.round((quizState.score / quizQuestions.length) * 100);
+                document.getElementById('quizQuestion').innerHTML = `<strong>Quiz Complete!</strong><br><br>You scored <span style="color: #ed7023; font-size: 32px;">${quizState.score}/${quizQuestions.length}</span> (${pct}%)`;
+                document.getElementById('quizOptions').innerHTML = '';
+                document.getElementById('quizFeedback').style.display = 'none';
+                document.getElementById('nextBtn').textContent = 'Restart Quiz';
+                document.getElementById('nextBtn').onclick = startQuiz;
+            }
+        }
+        
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDirectors();
+            loadWhatIsContent();
+            
+            // Populate knowledge panel
+            const kp = document.getElementById('knowledgePanel');
+            if (kp) {
+                kp.innerHTML = '<h2 style="color: #fbbf24; font-size: 18px; margin-bottom: 12px;">What is APEX?</h2><p><strong style="color: #f8fafc;">APEX</strong> = Athlete Performance Evaluation Index</p><h2 style="color: #fbbf24; font-size: 18px; margin: 24px 0 12px 0;">The Problem</h2><ul style="padding-left: 20px;"><li>33 million injuries/year</li><li>52% quit before high school</li></ul><h2 style="color: #fbbf24; font-size: 18px; margin: 24px 0 12px 0;">Evaluator Info</h2><ul style="padding-left: 20px;"><li>$79 per athlete</li><li>Up to 10 athletes/session</li><li>100% goes to you</li></ul>';
+            }
+            
+            // Setup event listeners
+            document.getElementById('sendBtn')?.addEventListener('click', handleSend);
+            document.getElementById('inputField')?.addEventListener('keypress', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } });
+            document.getElementById('knowledgeToggle')?.addEventListener('click', function() {
+                const panel = document.getElementById('knowledgePanel');
+                if (panel) {
+                    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+                    this.textContent = panel.style.display === 'none' ? '📖 Show Full Knowledge Base' : '📖 Hide Full Knowledge Base';
+                }
+            });
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+            document.getElementById('nextBtn')?.addEventListener('click', nextQuestion);
+            
+            // Modal close on escape/click outside
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id)); });
+            document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); }));
+            
+            // Initialize chat
+            setTimeout(() => setMode('chat'), 100);
+        });
+    </script>
+</body>
+</html>
